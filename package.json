@@ -1,0 +1,38 @@
+{
+  "name": "cinelog",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_EXTRA_CA_CERTS=./certs/lgcns-root-ca.pem next dev",
+    "build": "cross-env NODE_EXTRA_CA_CERTS=./certs/lgcns-root-ca.pem next build",
+    "start": "cross-env NODE_EXTRA_CA_CERTS=./certs/lgcns-root-ca.pem next start",
+    "lint": "eslint",
+    "test": "cross-env NODE_EXTRA_CA_CERTS=./certs/lgcns-root-ca.pem jest",
+    "test:watch": "cross-env NODE_EXTRA_CA_CERTS=./certs/lgcns-root-ca.pem jest --watch"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.5",
+    "@supabase/supabase-js": "^2.115.0",
+    "next": "16.3.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.4.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.2",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}
