@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.themoviedb.org)",
+      "Bash(npx jest *)",
+      "Bash(command -v chromium-cli)",
+      "Read(//c/Users/86168/.local/bin/**)"
+    ]
+  }
+}

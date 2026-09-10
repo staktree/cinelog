@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
-import { SessionProvider } from "@/components/auth/SessionProvider";
+import Header from "@/components/layout/Header";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 import "./globals.css";
 
@@ -20,14 +21,20 @@ export const metadata: Metadata = {
   description: "영화의 감상평을 작성하여 보관할 수 있는 웹 페이지 서비스",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <html
-      lang="en"
+      lang="ko"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <SessionProvider>{children}</SessionProvider>
+      <body className="flex min-h-full flex-col bg-zinc-50">
+        <Header userEmail={user?.email ?? null} />
+        <main className="flex flex-1 flex-col">{children}</main>
       </body>
     </html>
   );

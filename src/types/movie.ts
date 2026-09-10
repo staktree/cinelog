@@ -1,37 +1,38 @@
 /**
- * 영화 정보 조회 도메인 타입
- * - SDD/영화정보조회기능명세.md 기준
+ * 영화 정보 도메인 모델
+ * 참고: SDD/영화정보조회기능명세.md
  */
 
-/** 개봉 중인 영화 리스트 셀 요약 정보 */
+/** 개봉중인 영화 리스트의 각 셀에 표시되는 정보 (포스터, 제목) */
 export interface MovieSummary {
-  /** TMDB 영화 ID */
+  /** TMDB 영화ID */
   id: number;
   /** 영화 제목 */
   title: string;
-  /** 포스터 이미지 경로 (TMDB posterPath), 없을 수 있음 */
-  posterPath: string | null;
+  /** 포스터 이미지 URL (TMDB에 등록된 이미지가 없으면 null) */
+  posterUrl: string | null;
 }
 
-/** 영화 상세 정보 팝업 이미지 캐러셀용 이미지 1건 */
-export interface MovieImageItem {
-  /** 이미지 경로 (TMDB filePath) */
-  filePath: string;
-}
-
-/** 영화 상세 정보 팝업 관람평 1건 */
-export interface MovieReviewItem {
+/** 관람평 (TMDB 리뷰) */
+export interface MovieReview {
+  /** TMDB 리뷰ID */
   id: string;
+  /** 작성자 */
   author: string;
+  /** 리뷰 내용 */
   content: string;
 }
 
-/** 영화 상세 정보 (영화 제목, 이미지 캐러셀, 관람평점, 관람평) */
+/** 영화 상세 정보 (상세 팝업에 표시) */
 export interface MovieDetail {
+  /** TMDB 영화ID */
   id: number;
+  /** 영화 제목 */
   title: string;
-  /** 관람평점 (TMDB voteAverage, 0~10) */
+  /** 이미지 캐러셀에 표시할 이미지 URL 목록 */
+  imageUrls: string[];
+  /** 관람평점 (TMDB 평균 평점, 10점 만점) */
   voteAverage: number;
-  images: MovieImageItem[];
-  reviews: MovieReviewItem[];
+  /** 관람평 목록 */
+  reviews: MovieReview[];
 }

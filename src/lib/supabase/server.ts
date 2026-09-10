@@ -1,12 +1,7 @@
-/**
- * Supabase 서버 클라이언트 (Route Handler에서 사용)
- * - 요청의 세션 쿠키를 읽어 RLS가 로그인한 사용자 기준으로 적용되도록 한다
- */
-
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
-/** 현재 요청의 쿠키를 기반으로 Supabase 서버 클라이언트를 생성한다 */
+/** 서버 컴포넌트/서버 액션에서 사용하는 Supabase 클라이언트를 생성한다 (쿠키 기반 세션) */
 export async function createSupabaseServerClient() {
   const cookieStore = await cookies();
 
@@ -24,11 +19,11 @@ export async function createSupabaseServerClient() {
               cookieStore.set(name, value, options);
             });
           } catch {
-            // Server Component에서 호출되면 쿠키 설정이 불가하므로 무시한다.
-            // (미들웨어 - src/middleware.ts - 가 세션 쿠키 갱신을 담당한다)
+            // Server Component에서 호출된 경우 쓰기가 불가능하다.
+            // 세션 갱신은 proxy.ts에서 처리하므로 여기서는 무시한다.
           }
         },
       },
-    }
+    },
   );
 }

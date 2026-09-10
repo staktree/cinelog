@@ -16,6 +16,7 @@
 # next.js
 /.next/
 /out/
+/.swc/
 
 # production
 /build
@@ -32,20 +33,11 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
 
-# 감상평 저장 데이터 (런타임 생성 파일)
-/savedData/*
-!/savedData/review/.gitkeep
-
-# 사내망 SSL 인터셉션 대응용 루트 CA (로컬 환경 설정)
-/certs/*
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# Claude Code 개인 로컬 설정 (머신별 권한 설정 등)
-.claude/settings.local.json

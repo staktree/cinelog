@@ -1,23 +1,16 @@
-"use client";
+import { listReviewsAction } from "@/app/actions/reviewActions";
+import ReviewBrowser from "@/components/review/ReviewBrowser";
 
-/**
- * 메인 화면 (로고/메뉴바 + 메인화면 영역)
- * - SDD/워크플로우.md 1~3번 규칙: 메뉴바(감상평/영화정보) 전환, 초기 접속 시 감상평 조회 메뉴 Default
- */
+// 감상평 데이터가 파일시스템에 실시간으로 쌓이므로, 정적 캐싱 없이 매 요청마다 새로 조회한다
+export const dynamic = "force-dynamic";
 
-import { useState } from "react";
-
-import { AppHeader, type MenuType } from "@/components/layout/AppHeader";
-import { MovieInfoScreen } from "@/components/movies/MovieInfoScreen";
-import { ReviewScreen } from "@/components/reviews/ReviewScreen";
-
-export default function MainPage() {
-  const [activeMenu, setActiveMenu] = useState<MenuType>("review");
+/** 감상평 조회 화면 (초기 접속 시 Default로 오픈되는 메인화면) */
+export default async function HomePage() {
+  const initialResult = await listReviewsAction();
 
   return (
-    <div>
-      <AppHeader activeMenu={activeMenu} onMenuChange={setActiveMenu} />
-      {activeMenu === "review" ? <ReviewScreen /> : <MovieInfoScreen />}
+    <div className="mx-auto w-full max-w-6xl px-6 py-8">
+      <ReviewBrowser initialResult={initialResult} />
     </div>
   );
 }
