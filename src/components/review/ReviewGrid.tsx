@@ -18,20 +18,22 @@ export default function ReviewGrid({ reviews, onSelect }: ReviewGridProps) {
   }
 
   return (
-    <table className="w-full border-collapse overflow-hidden rounded-xl border border-zinc-200 text-sm">
-      <thead className="bg-zinc-50 text-left text-zinc-500">
-        <tr>
-          <th className="px-4 py-3 font-medium">영화 제목</th>
-          <th className="px-4 py-3 font-medium">평점</th>
-          <th className="px-4 py-3 font-medium">작성일</th>
-        </tr>
-      </thead>
-      <tbody className="divide-y divide-zinc-100">
-        {reviews.map((review) => (
-          <ReviewGridRow key={review.id} review={review} onSelect={onSelect} />
-        ))}
-      </tbody>
-    </table>
+    <div className="overflow-x-auto rounded-xl border border-zinc-200">
+      <table className="w-full min-w-[480px] border-collapse text-sm">
+        <thead className="bg-zinc-50 text-left text-zinc-500">
+          <tr>
+            <th className="px-4 py-3 font-medium">영화 제목</th>
+            <th className="px-4 py-3 font-medium">평점</th>
+            <th className="px-4 py-3 font-medium">작성일</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-zinc-100">
+          {reviews.map((review) => (
+            <ReviewGridRow key={review.id} review={review} onSelect={onSelect} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
