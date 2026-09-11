@@ -25,8 +25,17 @@ function toReview(row: ReviewRow): Review {
     rating: row.rating,
     content: row.content,
     oneLiner: row.one_liner,
-    createdAt: row.created_at,
+    createdAt: toDateOnly(row.created_at),
   };
+}
+
+/**
+ * DB에서 내려온 작성일자 값을 화면 표시 형식(YYYY-MM-DD)으로 정규화한다.
+ * Supabase 응답이 시간대(timestamp) 정보를 포함해서 내려오는 경우에도
+ * 항상 날짜 앞 10자리(YYYY-MM-DD)만 사용해서 시간 정보가 노출되지 않도록 한다.
+ */
+function toDateOnly(rawCreatedAt: string): string {
+  return rawCreatedAt.slice(0, 10);
 }
 
 /** 오늘 날짜를 작성일자 형식(YYYY-MM-DD)으로 변환한다 */

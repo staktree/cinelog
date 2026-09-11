@@ -85,6 +85,15 @@ describe("findAllReviews", () => {
 
     await expect(findAllReviews(supabase)).rejects.toThrow(StorageError);
   });
+
+  it("DB에서 시간 정보가 포함된 작성일자가 내려와도 YYYY-MM-DD만 표시한다", async () => {
+    const row = createReviewRow({ created_at: "2026-08-24T00:00:00+00:00" });
+    const supabase = createFakeSupabase({ fromResult: { data: [row], error: null } });
+
+    const reviews = await findAllReviews(supabase);
+
+    expect(reviews[0].createdAt).toBe("2026-08-24");
+  });
 });
 
 describe("findReviewById", () => {
