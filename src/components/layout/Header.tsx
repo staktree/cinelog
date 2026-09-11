@@ -26,7 +26,17 @@ export default function Header({ userEmail }: HeaderProps) {
 
   return (
     <header className="border-b border-zinc-200 bg-white">
-      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-4 sm:px-6 sm:py-4">
+      {/*
+       * ⚠️ 메뉴바(nav)는 화면 정중앙에 위치해야 한다 (와이어프레임: wireframe/화면구성_영화정보조회.png).
+       * grid-cols-[1fr_auto_1fr] 구조로 좌(로고)/우(계정영역) 열의 너비를 동일하게(1fr) 만들어서
+       * 그 사이의 nav(auto 열)가 항상 화면 중앙에 오도록 한 것 — 로고/계정영역 내용이 바뀌어도 깨지지 않는다.
+       * 이 구조를 유지·검증하는 회귀 테스트: Header.test.tsx
+       * 절대 nav를 로고 옆(예: flex + gap)에 붙이는 방식으로 되돌리지 말 것.
+       */}
+      <div
+        data-testid="app-header-bar"
+        className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-center sm:gap-4 sm:px-6 sm:py-4"
+      >
         {/* sm 이상에서는 display:contents로 래핑을 없애 로고/모바일용 계정영역이 그리드의 개별 열로 배치된다 */}
         <div className="flex items-center justify-between gap-3 sm:contents">
           <span className="text-lg font-bold text-zinc-900">시네로그</span>
